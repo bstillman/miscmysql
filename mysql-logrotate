@@ -1,0 +1,27 @@
+# MySQL logrotate config
+#
+# Create a cnf with user/pass for user with RELOAD privilege.
+# Place in /etc/logrotate.d/ directory.
+#
+# Rotates error and slow query log files daily.
+# Compresses past log files minus one.
+# Appends rotation date to past log files. 
+# Keeps 90 days worth. 
+
+
+/path/to/mysql-error.log
+/path/to/mysql-slow.log
+{
+ daily
+ compress
+ delaycompress
+ create 660 mysql mysql
+ dateext
+ missingok
+ notifempty
+ sharedscripts
+ postrotate
+  /usr/bin/mysql --defaults-file=/root/.logrotate.cnf -e 'FLUSH LOGS;'
+ endscript
+ rotate 90
+}
