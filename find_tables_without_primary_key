@@ -1,3 +1,4 @@
+## MySQL, MariaDB, Percona, etc ###
 
 ## All InnoDB tables should have a primary key, especially when using replication or Galera. Quick easy 
 ## way to find all of the tables without a primary key excluding views. 
