@@ -1,0 +1,14 @@
+
+## All InnoDB tables should have a primary key, especially when using replication or Galera. Quick easy 
+## way to find all of the tables without a primary key excluding views. 
+
+
+
+SELECT c.table_schema, c.table_name 
+FROM information_schema.columns c, information_schema.tables t
+WHERE c.table_schema = t.table_schema
+AND c.table_name = t.table_name
+AND c.table_schema NOT IN ('information_schema', 'mysql', 'performance_schema', 'common_schema') 
+AND t.table_type = 'BASE TABLE'
+GROUP BY c.table_schema, c.table_name 
+HAVING SUM(IF(c.column_key IN ('PRI','UNI'), 1,0)) = 0;
