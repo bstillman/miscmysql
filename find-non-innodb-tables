@@ -1,7 +1,7 @@
 ### Find all tables that aren't innodb excluding mysql, information_schema, etc.
 
 
-SELECT table_schema, table_name, engine 
-FROM information_schema.tables 
-WHERE engine != 'innodb' 
-AND table_schema NOT IN ('information_schema’, 'mysql’, 'performance_schema’, 'common_schema');
+SELECT table_schema, table_name, engine
+FROM information_schema.tables
+WHERE engine != 'innodb'
+AND table_schema NOT IN ('information_schema','mysql','performance_schema','common_schema');
